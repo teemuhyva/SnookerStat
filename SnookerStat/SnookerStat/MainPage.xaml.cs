@@ -13,5 +13,10 @@ namespace SnookerStat
         {
             InitializeComponent();
         }
+
+        async void Play(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new PlaySetGame());
+        }
     }
 }

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnookerStat.PlaySetGame3">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout HorizontalOptions="Center" Padding="0,5,0,-10">
+                <Label Text="Best Of" Margin="50"/>
+                <Picker Title="7" ItemsSource="{Binding BestOff}" ItemDisplayBinding="{Binding BestOff}"/>
+            </StackLayout>
+            <StackLayout Orientation="Vertical" HorizontalOptions="Center" 
+                         VerticalOptions="CenterAndExpand"
+                         Padding="0,20,0,0">
+                <Label Text="HandyCap" Margin="40"/>
+                <Label Text="{Binding Player1}" HorizontalOptions="Center"/>
+                <Picker Title="0" ItemsSource="{Binding HandyCap}" ItemDisplayBinding="{Binding HandyCap}"/>
+                <Label Text="{Binding Player2}" HorizontalOptions="Center"/>
+            </StackLayout>
+            <Button Text="Next" HorizontalOptions="Center" Clicked="PlayGame"/>
+            <Button Text="Back" HorizontalOptions="Center" Clicked="BackToSetGame2"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

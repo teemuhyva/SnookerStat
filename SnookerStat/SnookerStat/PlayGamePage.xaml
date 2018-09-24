@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnookerStat.PlayGamePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Menu" HorizontalOptions="Start"  WidthRequest="120"/>
+                <Button Command="{Binding GoToStats}" CommandParameter="{Binding}" Text="Stats" HorizontalOptions="Center"  WidthRequest="120"/>
+                <Button Text="Undo" HorizontalOptions="End" WidthRequest="120"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Player 1" Margin="5" HorizontalOptions="StartAndExpand"/>
+                <Label Text="Player 2" Margin="5" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
+                <Label Text="{Binding Player1Score}" Margin="5" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding Player2Score}" Margin="5" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="10,0,10,10">
+                <Label Text="Break" Margin="5" HorizontalOptions="StartAndExpand"/>
+                <Label Text="Break" Margin="5" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
+                <Label Text="{Binding Player1Break}" Margin="5" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding Player2Break}" Margin="5" HorizontalOptions="EndAndExpand"/>
+            </StackLayout>
+            <StackLayout BackgroundColor="White" Padding="10,85,10,10">
+                <ContentView>
+                    <!-- Jossain vaiheessa game text. On jo lisätty C# koodiin-->
+                </ContentView>
+            </StackLayout>
+            <StackLayout BackgroundColor="White" Padding="10,65,10,10">
+                <ContentView>
+                    <!-- Jossain vaiheessa game point text. ON jo lisätty C# koodiin-->
+                </ContentView>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding Rest}" Text="Rest" HorizontalOptions="Start" WidthRequest="120"/>
+                <Button Text="Snookered" HorizontalOptions="Center" WidthRequest="120"/>
+                <Button Command="{Binding Long}" Text="Long" HorizontalOptions="End" WidthRequest="120"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding AddOnePoint}"  BackgroundColor="Red" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding AddTwoPoint}" BackgroundColor="Yellow" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding AddThreePoint}" BackgroundColor="Green" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding AddFourPoint}" BackgroundColor="Blue" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding AddFivePoint}" BackgroundColor="Brown" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Command="{Binding AddSixPoint}" BackgroundColor="Pink" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding AddSevenPoint}" BackgroundColor="Black" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Command="{Binding MissedPot}" Text="Miss" TextColor="Black" BackgroundColor="#DCDCDC" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Text="Safe" TextColor="Black" BackgroundColor="#DCDCDC" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+                <Button Text="Foul" TextColor="Black" BackgroundColor="#DCDCDC" WidthRequest="70" HeightRequest="70" HorizontalOptions="Start"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

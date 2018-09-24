@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnookerStat.StatisticPage">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Label Text="Statistics" AbsoluteLayout.LayoutBounds="150, 5, 100, 20" />
+            <!-- Player 1 stats-->
+
+            <Label Text="Player 1" AbsoluteLayout.LayoutBounds="30, 10, 100, 20" />
+            <Label Text="{Binding PotsPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 50, 100, 20"/>
+            <Label Text="{Binding LongPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 100, 100, 20"/>
+            <Label Text="{Binding RestPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 150, 100, 20"/>
+            <Label Text="{Binding PsntPlayer1}" AbsoluteLayout.LayoutBounds="30, 200, 100, 20"/>
+            <Label Text="{Binding SafetyPlayer1}" AbsoluteLayout.LayoutBounds="30, 250, 100, 20"/>
+            <Label Text="{Binding ShotTimePlayer1}" AbsoluteLayout.LayoutBounds="30, 300, 100, 20"/>
+            <Label Text="{Binding TableTimePlayer1}" AbsoluteLayout.LayoutBounds="30, 350, 100, 20"/>
+            <Label Text="{Binding EscapePlayer1}" AbsoluteLayout.LayoutBounds="30, 400, 100, 20"/>
+
+            <!-- what will be calculated-->
+
+            <Label Text="Pots" AbsoluteLayout.LayoutBounds="150, 50, 100, 20"/>
+            <Label Text="Long" AbsoluteLayout.LayoutBounds="150, 100, 100, 20"/>
+            <Label Text="Rest" AbsoluteLayout.LayoutBounds="150, 150, 100, 20"/>
+            <Label Text="Position" AbsoluteLayout.LayoutBounds="150, 200, 100, 20"/>
+            <Label Text="Safety" AbsoluteLayout.LayoutBounds="150, 250, 100, 20"/>
+            <Label Text="Shot time" AbsoluteLayout.LayoutBounds="150, 300, 100, 20"/>
+            <Label Text="Table time" AbsoluteLayout.LayoutBounds="150, 350, 100, 20"/>
+            <Label Text="Escape" AbsoluteLayout.LayoutBounds="150, 400, 100, 20"/>
+
+            <!-- Player 2 stats-->
+
+            <Label Text="Player 2" AbsoluteLayout.LayoutBounds="300, 10, 100, 20"  />
+            <Label Text="{Binding PotsPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 50, 100, 20"/>
+            <Label Text="{Binding LongPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 100, 100, 20"/>
+            <Label Text="{Binding RestPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 150, 100, 20"/>
+            <Label Text="{Binding PsntPlayer2}" AbsoluteLayout.LayoutBounds="250, 200, 100, 20"/>
+            <Label Text="{Binding SafetyPlayer2}" AbsoluteLayout.LayoutBounds="250, 250, 100, 20"/>
+            <Label Text="{Binding ShotTimePlayer2}" AbsoluteLayout.LayoutBounds="250, 300, 100, 20"/>
+            <Label Text="{Binding TableTimePlayer2}" AbsoluteLayout.LayoutBounds="250, 350, 100, 20"/>
+            <Label Text="{Binding EscapePlayer2}" AbsoluteLayout.LayoutBounds="250, 400, 100, 20"/>
+
+            <Button Command="{Binding BackToGame}" Text="Game" AbsoluteLayout.LayoutBounds="80, 450, 100, 50" />
+            <Button Text="Break" AbsoluteLayout.LayoutBounds="200, 450, 100, 50" />
+
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

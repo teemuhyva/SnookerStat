@@ -4,11 +4,14 @@
              xmlns:local="clr-namespace:SnookerStat"
              x:Class="SnookerStat.MainPage">
 
-    <StackLayout>
-        <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
-           HorizontalOptions="Center"
-           VerticalOptions="CenterAndExpand" />
+    <StackLayout HorizontalOptions="Center" Padding="0,80,0, 0">
+        <Button Text="Play" Clicked="Play"  WidthRequest="50"></Button>
+        <Button Text="Game Settings"  WidthRequest="100"></Button>
+        <Button Text="My Account"  WidthRequest="100"></Button>
+        <Button Text="History"  WidthRequest="100"></Button>
+        <Button Text="Friends"  WidthRequest="100"></Button>
+        <Button Text="Instuctions"  WidthRequest="150"></Button>
     </StackLayout>
+
 
 </ContentPage>

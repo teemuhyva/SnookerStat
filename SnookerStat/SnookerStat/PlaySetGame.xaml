@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnookerStat.PlaySetGame">
+    <ContentPage.Content>
+        <StackLayout  HorizontalOptions="Center" VerticalOptions="Center">
+            <StackLayout>
+                <Label 
+                    Text="Snooker"
+                    FontAttributes="Bold"
+                    FontSize="26"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+                <Label 
+                    Text="Standard" 
+                    FontAttributes="Bold"
+                    FontSize="26"
+                    VerticalOptions="Center" 
+                    HorizontalOptions="Center" />
+            </StackLayout>
+            <StackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                <Button Text="New Match" Clicked="StartNewMatch"></Button>
+                <Button Text="Continue"></Button>
+                <Button Text="Tournament"></Button>
+                <Button Text="Home"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
