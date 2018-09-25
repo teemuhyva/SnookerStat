@@ -41,15 +41,15 @@ namespace SnookerStat
                 if (string.IsNullOrEmpty(p1))
                 {
                     var selection = e.SelectedItem as Players;
-                    player1.Text = selection.PlayerName;
-                    players.Player1 = selection.PlayerName;
+                    player1.Text = selection.NickName;
+                    players.Player1 = selection.NickName;
 
                 }
                 else if (string.IsNullOrEmpty(p2))
                 {
                     var selection = e.SelectedItem as Players;
-                    player2.Text = selection.PlayerName;
-                    players.Player2 = selection.PlayerName;
+                    player2.Text = selection.NickName;
+                    players.Player2 = selection.NickName;
                 }
 
             }
@@ -62,6 +62,7 @@ namespace SnookerStat
             if(playerNick != null)
             {
                 await findPlayer.FindPlayerByNick(playerNick);
+                LoadPlayerList();
             }
         }
 
@@ -69,6 +70,18 @@ namespace SnookerStat
         {
             ObservableCollection<Players> playerList = await players.ListPreviousPlayedNicks();
             playerView.ItemsSource = playerList;
+        }
+
+        void EmptyPlayerTwo(object sender, EventArgs e) 
+        {
+            player2.Text = "";
+            players.Player2 = "";
+        }
+
+        void EmptyPlayerOne(object sender, EventArgs e)
+        {
+            player1.Text = "";
+            players.Player1 = "";
         }
     }
 }

@@ -46,19 +46,14 @@ namespace SnookerStat.Model
         {
             try
             {
-                string url = "https://snookerapiproject.azurewebsites.net/api/friends/findFriendByNick";
+                string url = "https://snookerapiproject.azurewebsites.net/api/users/searchFriendAndAddAsFriend";
                 var obj = new Players { NickName = nickName };
                 var json = JsonConvert.SerializeObject(obj);
                 var content = new StringContent(json, Encoding.UTF8, "application/json");
                 var request = await client.PostAsync(url, content);
                 if (request.IsSuccessStatusCode)
                 {
-                    var response = await request.Content.ReadAsStringAsync();
-                    NickName = response;  
-                } else
-                {
-
-                    PlayerName = null;
+                    Debug.WriteLine("Success");
                 }
             }
             catch (Exception e)
