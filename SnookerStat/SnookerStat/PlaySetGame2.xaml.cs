@@ -23,7 +23,6 @@ namespace SnookerStat
             BindingContext = new PlayerPickViewModel();
 
             LoadPlayerList();
-            //playerView.ItemsSource = players.PlayerList;
         }
 
         async void SetHandiCapPage(object sender, EventArgs e)

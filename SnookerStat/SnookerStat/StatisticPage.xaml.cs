@@ -14,10 +14,10 @@ namespace SnookerStat
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class StatisticPage : ContentPage
 	{
-		public StatisticPage (GameStatistics gameStatistics)
+		public StatisticPage (GameStatistics gameStatistics, Players players)
 		{
 			InitializeComponent ();
-            BindingContext = new GameStatisticViewModel(gameStatistics, Navigation);
+            BindingContext = new GameStatisticViewModel(gameStatistics, Navigation, players);
         }
 	}
 }

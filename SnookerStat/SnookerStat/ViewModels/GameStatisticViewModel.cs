@@ -24,15 +24,19 @@ namespace SnookerStat.ViewModels
         private Boolean Player1Turn;
 
         private string calculateAverageFor;
+        private string player1;
+        private string player2;
 
         private INavigation _navigation;
 
         GameStatistics _gameStatistics;
+        Players _player;
 
-        public GameStatisticViewModel(GameStatistics gameStatistics, INavigation navigation)
+        public GameStatisticViewModel(GameStatistics gameStatistics, INavigation navigation, Players player)
         {
             _navigation = navigation;
             _gameStatistics = gameStatistics;
+            _player = player;
             BackToGame = new Command<object>(GoBackToGame);
         }
 
@@ -43,6 +47,19 @@ namespace SnookerStat.ViewModels
         }
 
         public Command<object> BackToGame { get; set; }
+
+        public string Player1 {
+            set {
+                player1 = _player.Player1;
+                OnPropertyChanged();
+            }
+        }
+        public string Player2 {
+            set {
+                player2 = _player.Player2;
+                OnPropertyChanged();
+            }
+        }
 
         //update statistic for player1
         public string PotsPlayer1 {
@@ -208,7 +225,7 @@ namespace SnookerStat.ViewModels
             stats.player2total = _gameStatistics.player2total;
             stats.player2break = _gameStatistics.player2break;
 
-            var playGamePage = new PlayGamePage(stats);
+            var playGamePage = new PlayGamePage(stats, _player);
             NavigationPage.SetHasNavigationBar(playGamePage, false);
 
             _navigation.PushAsync(playGamePage);

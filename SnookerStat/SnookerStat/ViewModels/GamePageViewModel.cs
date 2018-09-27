@@ -4,13 +4,20 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace SnookerStat.ViewModels
 {
     public class GamePageViewModel
     {
-        private int player1Score, player2Score, player1Break, player2Break;
+        private int player1Score;
+        private int player2Score;
+        private int player1Break;
+        private int player2Break;
+
+        private string player1;
+        private string player2;
 
         private int totalPointsInGame = 147;
         private int currentPointsGained, currentAmountRedPotted;
@@ -35,15 +42,17 @@ namespace SnookerStat.ViewModels
         private INavigation _navigation;
 
         GameStatistics _gameStatistics;
+        Players _players;
 
         //if red is false player can pot colored ball
         Boolean red = true;
 
         Boolean player1Turn = true;
 
-        public GamePageViewModel(GameStatistics gameStatistics, INavigation navigation)
+        public GamePageViewModel(GameStatistics gameStatistics, INavigation navigation, Players players)
         {
             _navigation = navigation;
+            _players = players;
             AddOnePoint = new Command(() => AddPoints(1));
             AddTwoPoint = new Command(() => AddPoints(2));
             AddThreePoint = new Command(() => AddPoints(3));
@@ -81,6 +90,26 @@ namespace SnookerStat.ViewModels
         }
 
         public Command<object> GoToStats { get; set; }
+
+        public string Player1 {
+            get {
+                return player1;
+            }
+            set {
+                player1 = _players.Player1;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Player2 {
+            get {
+                return player2;
+            }
+            set {
+                player2 = _players.Player2;
+                OnPropertyChanged();
+            }
+        }
 
         //update scores
         public int Player1Score {
@@ -177,7 +206,7 @@ namespace SnookerStat.ViewModels
 
         void AddPoints(int amount)
         {
-            if (currentAmountRedPotted < 15 || totalPointsInGame < 147)
+            if (currentAmountRedPotted < 15)
             {
                 if (player1Turn)
                 {
@@ -232,7 +261,7 @@ namespace SnookerStat.ViewModels
 
                 }
             }
-            else if (currentAmountRedPotted == 15 && currentPointsGained == 140)
+            else if (currentAmountRedPotted == 15)
             {
                 AddLastPoints();
             }
@@ -354,7 +383,7 @@ namespace SnookerStat.ViewModels
             stats.player2total = player2Score;
             stats.player2break = player2Score;
 
-            _navigation.PushAsync(new StatisticPage(stats));
+            _navigation.PushAsync(new StatisticPage(stats, _players));
         }
         void AddLastPoints()
         {
@@ -365,7 +394,7 @@ namespace SnookerStat.ViewModels
                     Player1Score = 7;
                     Player1Break = 7;
                     currentPointsGained += 7;
-                    black = true;
+                    black = true;                    
 
                     if (isLong)
                     {
@@ -380,6 +409,7 @@ namespace SnookerStat.ViewModels
                         restTotal1 += 1;
                         isRest = false;
                     }
+                    StoreScore(player1Score, player2Score, player1Break, player2Break);
                 }
                 else
                 {
@@ -401,8 +431,15 @@ namespace SnookerStat.ViewModels
                         restTotal2 += 1;
                         isRest = false;
                     }
+                    StoreScore(player1Score, player2Score, player1Break, player2Break);
                 }
             }
+        }
+
+        public async Task StoreScore(int player1Score, int player2Score, int player1Break, int player2Break)
+        {
+            GameScores gameScore = new GameScores();
+            await gameScore.SaveScore(player1Score, player2Score, player1Break, player2Break);
         }
     }
 }

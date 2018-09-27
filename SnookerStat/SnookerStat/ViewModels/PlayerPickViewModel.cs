@@ -72,8 +72,7 @@ namespace SnookerStat.ViewModels
         public async Task FindPlayerByNick(string nick)
         {
             Players player = new Players();
-            await player.FindPlayerByNick(nick);
-            
+            await player.FindPlayerByNick(nick);            
         }
     }
 }

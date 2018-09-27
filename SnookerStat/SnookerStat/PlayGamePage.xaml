@@ -10,8 +10,8 @@
                 <Button Text="Undo" HorizontalOptions="End" WidthRequest="120"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
-                <Label Text="Player 1" Margin="5" HorizontalOptions="StartAndExpand"/>
-                <Label Text="Player 2" Margin="5" HorizontalOptions="EndAndExpand"/>
+                <Label Text="{Binding Player1}" Margin="5" HorizontalOptions="StartAndExpand"/>
+                <Label Text="{Binding Player2}" Margin="5" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" Padding="20,0,20,0">
                 <Label Text="{Binding Player1Score}" Margin="5" HorizontalOptions="StartAndExpand"/>

@@ -7,7 +7,7 @@
             <Label Text="Statistics" AbsoluteLayout.LayoutBounds="150, 5, 100, 20" />
             <!-- Player 1 stats-->
 
-            <Label Text="Player 1" AbsoluteLayout.LayoutBounds="30, 10, 100, 20" />
+            <Label Text="{Binding Player1}" AbsoluteLayout.LayoutBounds="30, 10, 100, 20" />
             <Label Text="{Binding PotsPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 50, 100, 20"/>
             <Label Text="{Binding LongPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 100, 100, 20"/>
             <Label Text="{Binding RestPlayer1, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="30, 150, 100, 20"/>
@@ -30,7 +30,7 @@
 
             <!-- Player 2 stats-->
 
-            <Label Text="Player 2" AbsoluteLayout.LayoutBounds="300, 10, 100, 20"  />
+            <Label Text="{Binding Player2}" AbsoluteLayout.LayoutBounds="300, 10, 100, 20"  />
             <Label Text="{Binding PotsPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 50, 100, 20"/>
             <Label Text="{Binding LongPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 100, 100, 20"/>
             <Label Text="{Binding RestPlayer2, Mode=TwoWay}" AbsoluteLayout.LayoutBounds="250, 150, 100, 20"/>

@@ -15,14 +15,16 @@ namespace SnookerStat
 	public partial class PlaySetGame3 : ContentPage
 	{
         GameStatistics gameStatistics = new GameStatistics();
+        Players player = new Players();
         public PlaySetGame3 (Players players)
 		{
 			InitializeComponent ();
+            player = players;
             BindingContext = new LenghtPlayPickerViewModel(players);
         }
         async void PlayGame(object sender, EventArgs e)
         {
-            var playGamePage = new PlayGamePage(gameStatistics);
+            var playGamePage = new PlayGamePage(gameStatistics, player);
             NavigationPage.SetHasNavigationBar(playGamePage, false);
             await Navigation.PushAsync(playGamePage);
 
