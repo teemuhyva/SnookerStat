@@ -207,6 +207,9 @@ namespace SnookerStat.ViewModels
         }
         public void GoBackToGame(object sender)
         {
+            //take stats to statistic page but also keep scores so it won't reset
+            //this is basically hack as cache not used
+            //TODO: some alternate method might be in place
             GameStatistics stats = new GameStatistics();
             stats.potsSuccessPlayer1 = _gameStatistics.potsSuccessPlayer1;
             stats.totalTriesPlayer1 = _gameStatistics.totalTriesPlayer1;
@@ -224,6 +227,7 @@ namespace SnookerStat.ViewModels
             stats.player1break = _gameStatistics.player1break;
             stats.player2total = _gameStatistics.player2total;
             stats.player2break = _gameStatistics.player2break;
+            stats.currentAmountRedPotted = _gameStatistics.currentAmountRedPotted;
 
             var playGamePage = new PlayGamePage(stats, _player);
             NavigationPage.SetHasNavigationBar(playGamePage, false);

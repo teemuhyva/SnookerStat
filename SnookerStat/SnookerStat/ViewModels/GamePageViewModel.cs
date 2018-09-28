@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace SnookerStat.ViewModels
 {
-    public class GamePageViewModel
+    public class GamePageViewModel : INotifyPropertyChanged
     {
         private int player1Score;
         private int player2Score;
@@ -20,7 +21,9 @@ namespace SnookerStat.ViewModels
         private string player2;
 
         private int totalPointsInGame = 147;
-        private int currentPointsGained, currentAmountRedPotted;
+       // private int currentPointsGained;
+        private int currentAmountRedPotted;
+        private int lastPoints;
         private string gameTextArea, gameScoreArea;
         private string playerStatsDisplayText;
 
@@ -39,6 +42,14 @@ namespace SnookerStat.ViewModels
         private Boolean pink = false;
         private Boolean black = false;
 
+        //hack for last points.
+        private int yellowPoint;
+        private int greenPoint;
+        private int bluePoint;
+        private int brownPoint;
+        private int pinkPoint;
+        private int blackPoint;
+
         private INavigation _navigation;
 
         GameStatistics _gameStatistics;
@@ -49,10 +60,18 @@ namespace SnookerStat.ViewModels
 
         Boolean player1Turn = true;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string name = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
         public GamePageViewModel(GameStatistics gameStatistics, INavigation navigation, Players players)
         {
             _navigation = navigation;
             _players = players;
+            player1 = players.Player1;
+            player2 = players.Player2;
             AddOnePoint = new Command(() => AddPoints(1));
             AddTwoPoint = new Command(() => AddPoints(2));
             AddThreePoint = new Command(() => AddPoints(3));
@@ -81,12 +100,7 @@ namespace SnookerStat.ViewModels
             player1Break = gameStatistics.player1break;
             player2Score = gameStatistics.player2total;
             player2Score = gameStatistics.player2break;
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        void OnPropertyChanged([CallerMemberName] string name = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+            currentAmountRedPotted = gameStatistics.currentAmountRedPotted;
         }
 
         public Command<object> GoToStats { get; set; }
@@ -96,7 +110,7 @@ namespace SnookerStat.ViewModels
                 return player1;
             }
             set {
-                player1 = _players.Player1;
+                player1 = value;
                 OnPropertyChanged();
             }
         }
@@ -106,7 +120,7 @@ namespace SnookerStat.ViewModels
                 return player2;
             }
             set {
-                player2 = _players.Player2;
+                player2 = value;
                 OnPropertyChanged();
             }
         }
@@ -214,26 +228,24 @@ namespace SnookerStat.ViewModels
                     {
                         Player1Score = amount;
                         Player1Break = amount;
-                        AddPointsGained(amount);
+                        //AddPointsGained(amount);
                         CheckLongRest(isLong, isRest, player1Turn);
                         potsSuccessPlayer1 += 1;
                         totalTriesPlayer1 += 1;
                         currentAmountRedPotted += 1;
                         red = false;
                     }
+                    //!red prevents to get more points before red is potted
                     if (!red && amount > 1)
                     {
                         Player1Score = amount;
                         Player1Break = amount;
-                        AddPointsGained(amount);
+                        //AddPointsGained(amount);
                         CheckLongRest(isLong, isRest, player1Turn);
                         potsSuccessPlayer1 += 1;
                         totalTriesPlayer1 += 1;
                         red = true;
                     }
-
-
-
                 }
                 else
                 {
@@ -241,32 +253,68 @@ namespace SnookerStat.ViewModels
                     {
                         Player2Score = amount;
                         Player2Break = amount;
-                        AddPointsGained(amount);
+                        //AddPointsGained(amount);
                         CheckLongRest(isLong, isRest, player1Turn);
                         potsSuccessPlayer2 += 1;
                         totalTriesPlayer2 += 1;
                         currentAmountRedPotted += 1;
                         red = false;
                     }
+                    //!red prevents to get more points before red is potted
                     if (!red && amount > 1)
                     {
                         Player2Score = amount;
                         Player2Break = amount;
-                        AddPointsGained(amount);
+                        //AddPointsGained(amount);
                         CheckLongRest(isLong, isRest, player1Turn);
                         potsSuccessPlayer1 += 1;
                         totalTriesPlayer1 += 1;
                         red = true;
                     }
-
                 }
             }
             else if (currentAmountRedPotted == 15)
             {
-                AddLastPoints();
+                if(yellowPoint == 0 && amount == 2 
+                    && greenPoint == 0)
+                {
+                    yellowPoint = 2;
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
+                if(greenPoint == 0 && amount == 3 
+                    && yellowPoint > 0 && bluePoint == 0)
+                {
+                    greenPoint = 3;     
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
+                if(bluePoint == 0 && amount == 4
+                    && brownPoint == 0 && greenPoint > 0)
+                {
+                    bluePoint = 4;
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
+                if(brownPoint == 0 && amount == 5
+                    && pinkPoint == 0 && bluePoint > 0)
+                {
+                    brownPoint = 5;
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
+                if(pinkPoint == 0 && amount == 6
+                    && blackPoint == 0 && pinkPoint > 0)
+                {
+                    pinkPoint = 6;
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
+                if(blackPoint == 0 && amount == 7
+                    && pinkPoint > 0)
+                {
+                    blackPoint = 7;
+                    AddLastPoints(isPlayer1Turn, amount);
+                }
             }
 
         }
+        /*
         void AddPointsGained(int amount)
         {
             if (player1Turn)
@@ -277,8 +325,8 @@ namespace SnookerStat.ViewModels
             {
                 currentPointsGained += amount;
             }
-
         }
+        */
         void CheckLongRest(Boolean isLong, Boolean isRest, Boolean player1Turn)
         {
 
@@ -365,6 +413,9 @@ namespace SnookerStat.ViewModels
         }
         private void CheckStats(object sender)
         {
+            //take stats to statistic page but also keep scores so it won't reset
+            //this is basically hack as cache not used
+            //TODO: some alternate method might be in place
             GameStatistics stats = new GameStatistics();
             stats.potsSuccessPlayer1 = potsSuccessPlayer1;
             stats.totalTriesPlayer1 = totalTriesPlayer1;
@@ -382,64 +433,81 @@ namespace SnookerStat.ViewModels
             stats.player1break = player1Break;
             stats.player2total = player2Score;
             stats.player2break = player2Score;
+            stats.currentAmountRedPotted = currentAmountRedPotted;
 
             _navigation.PushAsync(new StatisticPage(stats, _players));
         }
-        void AddLastPoints()
+        void AddLastPoints(Boolean player1Turn, int amount)
         {
-            if (!black)
+            if(amount == 2)
             {
-                if (player1Turn)
-                {
-                    Player1Score = 7;
-                    Player1Break = 7;
-                    currentPointsGained += 7;
-                    black = true;                    
+                AddLastBallPoints(2);
+            }      
+            if (amount == 3)
+            {
+                AddLastBallPoints(3);
+            }
 
-                    if (isLong)
-                    {
-                        longSuccess1 += 1;
-                        longTotal1 += 1;
-                        isLong = false;
-                    }
+            if (amount == 4)
+            {
+                AddLastBallPoints(4);
+            }
 
-                    if (isRest)
-                    {
-                        restSuccess1 += 1;
-                        restTotal1 += 1;
-                        isRest = false;
-                    }
-                    StoreScore(player1Score, player2Score, player1Break, player2Break);
-                }
-                else
-                {
-                    Player2Score = 7;
-                    Player2Break = 7;
-                    currentPointsGained += 7;
-                    black = true;
+            if (amount == 5)
+            {
+                AddLastBallPoints(5);
+            }
 
-                    if (isLong)
-                    {
-                        longSuccess2 += 1;
-                        longTotal2 += 1;
-                        isLong = false;
-                    }
+            if (amount == 6)
+            {
+                AddLastBallPoints(6);
+            }
 
-                    if (isRest)
-                    {
-                        restSuccess2 += 1;
-                        restTotal2 += 1;
-                        isRest = false;
-                    }
-                    StoreScore(player1Score, player2Score, player1Break, player2Break);
-                }
+            if (amount == 7)
+            {
+                AddLastBallPoints(7);
+                StartNewGame();
+            }         
+
+        }
+        private void AddLastBallPoints(int point)
+        {
+            if(player1Turn)
+            {
+                Player1Score = point;
+                Player1Break = point;
+               // AddPointsGained(point);
+            } else
+            {
+                Player2Score = point;
+                Player2Break = point;
+                // AddPointsGained(point);
             }
         }
-
-        public async Task StoreScore(int player1Score, int player2Score, int player1Break, int player2Break)
+        public async Task StartNewGame()
         {
-            GameScores gameScore = new GameScores();
-            await gameScore.SaveScore(player1Score, player2Score, player1Break, player2Break);
+            GameScores gameScores = new GameScores();
+            await gameScores.SaveScore(player1Score, player2Score, player1Break, player2Break);
+            ClearContent();
+        }
+        void ClearContent()
+        {
+            potsSuccessPlayer1 = 0;
+            totalTriesPlayer1 = 0;
+            potsSuccessPlayer2 = 0;
+            totalTriesPlayer2 = 0;
+            longSuccess1 = 0;
+            longTotal1 = 0;
+            longSuccess2 = 0;
+            longTotal2 = 0;
+            restSuccess1 = 0;
+            restTotal1 = 0;
+            restSuccess2 = 0;
+            restTotal2 = 0;
+            player1Score = 0;
+            player1Break = 0;
+            player2Score = 0;
+            player2Score = 0;
         }
     }
 }

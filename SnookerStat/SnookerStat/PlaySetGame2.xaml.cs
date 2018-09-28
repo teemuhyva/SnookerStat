@@ -27,7 +27,9 @@ namespace SnookerStat
 
         async void SetHandiCapPage(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PlaySetGame3(players));
+            var playSetGame3 = new PlaySetGame3(players);
+            NavigationPage.SetHasNavigationBar(playSetGame3, false);
+            await Navigation.PushAsync(playSetGame3);
         }
         void ChooseItem(object sender, SelectedItemChangedEventArgs e)
         {

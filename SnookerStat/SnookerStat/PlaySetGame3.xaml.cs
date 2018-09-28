@@ -32,7 +32,9 @@ namespace SnookerStat
 
         async void BackToSetGame2(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PlaySetGame2());
+            var playSetGame2 = new PlaySetGame2();
+            NavigationPage.SetHasNavigationBar(playSetGame2, false);
+            await Navigation.PushAsync(playSetGame2);
         }
     }
 }

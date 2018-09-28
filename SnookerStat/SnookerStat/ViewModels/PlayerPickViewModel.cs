@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SnookerStat.ViewModels
 {
-    public class PlayerPickViewModel
+    public class PlayerPickViewModel : INotifyPropertyChanged
     {
         private string findPlayerWithNick;
         private string player1;

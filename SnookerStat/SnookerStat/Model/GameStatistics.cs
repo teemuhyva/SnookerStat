@@ -26,5 +26,6 @@ namespace SnookerStat.Model
         public int player2total { get; set; }
         public int player1break { get; set; }
         public int player2break { get; set; }
+        public int currentAmountRedPotted { get; set; }
     }
 }

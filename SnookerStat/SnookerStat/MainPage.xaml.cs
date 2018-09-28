@@ -16,7 +16,9 @@ namespace SnookerStat
 
         async void Play(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new PlaySetGame());
+            var playSetGame = new PlaySetGame();
+            NavigationPage.SetHasNavigationBar(playSetGame, false);
+            await Navigation.PushAsync(playSetGame);
         }
     }
 }
