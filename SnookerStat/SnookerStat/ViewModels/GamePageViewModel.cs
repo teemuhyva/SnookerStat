@@ -30,6 +30,7 @@ namespace SnookerStat.ViewModels
         int potsSuccessPlayer1, totalTriesPlayer1, potsSuccessPlayer2, totalTriesPlayer2, longSuccess1, longTotal1,
             longSuccess2, longTotal2, restSuccess1, restTotal1, restSuccess2, restTotal2;
 
+        private int gameNumber;
         private double average;
         private Boolean isPlayer1Turn;
         private Boolean isRest;
@@ -84,23 +85,30 @@ namespace SnookerStat.ViewModels
             Rest = new Command(RestEnabled);
             Long = new Command(LongEnabled);
 
-            potsSuccessPlayer1 = gameStatistics.potsSuccessPlayer1;
-            totalTriesPlayer1 = gameStatistics.totalTriesPlayer1;
-            potsSuccessPlayer2 = gameStatistics.potsSuccessPlayer2;
-            totalTriesPlayer2 = gameStatistics.totalTriesPlayer2;
-            longSuccess1 = gameStatistics.longSuccess1;
-            longTotal1 = gameStatistics.longTotal1;
-            longSuccess2 = gameStatistics.longSuccess2;
-            longTotal2 = gameStatistics.longTotal2;
-            restSuccess1 = gameStatistics.restSuccess1;
-            restTotal1 = gameStatistics.restTotal1;
-            restSuccess2 = gameStatistics.restSuccess2;
-            restTotal2 = gameStatistics.restTotal2;
-            player1Score = gameStatistics.player1total;
-            player1Break = gameStatistics.player1break;
-            player2Score = gameStatistics.player2total;
-            player2Score = gameStatistics.player2break;
-            currentAmountRedPotted = gameStatistics.currentAmountRedPotted;
+            potsSuccessPlayer1 = gameStatistics.PotsSuccessPlayer1;
+            totalTriesPlayer1 = gameStatistics.TotalTriesPlayer1;
+            potsSuccessPlayer2 = gameStatistics.PotsSuccessPlayer2;
+            totalTriesPlayer2 = gameStatistics.TotalTriesPlayer2;
+            longSuccess1 = gameStatistics.LongSuccess1;
+            longTotal1 = gameStatistics.LongTotal1;
+            longSuccess2 = gameStatistics.LongSuccess2;
+            longTotal2 = gameStatistics.LongTotal2;
+            restSuccess1 = gameStatistics.RestSuccess1;
+            restTotal1 = gameStatistics.RestTotal1;
+            restSuccess2 = gameStatistics.RestSuccess2;
+            restTotal2 = gameStatistics.RestTotal2;
+            player1Score = gameStatistics.Player1total;
+            player1Break = gameStatistics.Player1break;
+            player2Score = gameStatistics.Player2total;
+            player2Score = gameStatistics.Player2break;
+            currentAmountRedPotted = gameStatistics.CurrentAmountRedPotted;
+            yellowPoint = gameStatistics.YellowPoint;
+            greenPoint = gameStatistics.GreenPoint;
+            bluePoint = gameStatistics.BluePoint;
+            brownPoint = gameStatistics.BrownPoint;
+            pinkPoint = gameStatistics.PinkPoint;
+            blackPoint = gameStatistics.BlackPoint;
+            gameNumber = gameStatistics.GameNumber;
         }
 
         public Command<object> GoToStats { get; set; }
@@ -131,7 +139,7 @@ namespace SnookerStat.ViewModels
                 return player1Score;
             }
             set {
-                player1Score += value;
+                player1Score += value;                               
                 OnPropertyChanged();
             }
         }
@@ -164,37 +172,37 @@ namespace SnookerStat.ViewModels
         }
         public int PotsSuccessPlayer1 {
             get {
-                return _gameStatistics.potsSuccessPlayer1;
+                return _gameStatistics.PotsSuccessPlayer1;
             }
             set {
-                _gameStatistics.potsSuccessPlayer1 += 1;
+                _gameStatistics.PotsSuccessPlayer1 += 1;
                 OnPropertyChanged();
             }
         }
         public int TotalTriesPlayer1 {
             get {
-                return _gameStatistics.totalTriesPlayer1;
+                return _gameStatistics.TotalTriesPlayer1;
             }
             set {
-                _gameStatistics.totalTriesPlayer1 += 1;
+                _gameStatistics.TotalTriesPlayer1 += 1;
                 OnPropertyChanged();
             }
         }
         public int PotsSuccessPlayer2 {
             get {
-                return _gameStatistics.potsSuccessPlayer2;
+                return _gameStatistics.PotsSuccessPlayer2;
             }
             set {
-                _gameStatistics.potsSuccessPlayer2 += 1;
+                _gameStatistics.PotsSuccessPlayer2 += 1;
                 OnPropertyChanged();
             }
         }
         public int TotalTriesPlayer2 {
             get {
-                return _gameStatistics.totalTriesPlayer2;
+                return _gameStatistics.TotalTriesPlayer2;
             }
             set {
-                _gameStatistics.totalTriesPlayer2 += 1;
+                _gameStatistics.TotalTriesPlayer2 += 1;
                 OnPropertyChanged();
             }
         }
@@ -279,37 +287,37 @@ namespace SnookerStat.ViewModels
                     && greenPoint == 0)
                 {
                     yellowPoint = 2;
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
                 if(greenPoint == 0 && amount == 3 
                     && yellowPoint > 0 && bluePoint == 0)
                 {
                     greenPoint = 3;     
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
                 if(bluePoint == 0 && amount == 4
                     && brownPoint == 0 && greenPoint > 0)
                 {
                     bluePoint = 4;
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
                 if(brownPoint == 0 && amount == 5
                     && pinkPoint == 0 && bluePoint > 0)
                 {
                     brownPoint = 5;
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
                 if(pinkPoint == 0 && amount == 6
-                    && blackPoint == 0 && pinkPoint > 0)
+                    && blackPoint == 0 && brownPoint > 0)
                 {
                     pinkPoint = 6;
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
                 if(blackPoint == 0 && amount == 7
                     && pinkPoint > 0)
                 {
                     blackPoint = 7;
-                    AddLastPoints(isPlayer1Turn, amount);
+                    AddLastPoints(amount);
                 }
             }
 
@@ -417,27 +425,34 @@ namespace SnookerStat.ViewModels
             //this is basically hack as cache not used
             //TODO: some alternate method might be in place
             GameStatistics stats = new GameStatistics();
-            stats.potsSuccessPlayer1 = potsSuccessPlayer1;
-            stats.totalTriesPlayer1 = totalTriesPlayer1;
-            stats.potsSuccessPlayer2 = potsSuccessPlayer2;
-            stats.totalTriesPlayer2 = totalTriesPlayer2;
-            stats.longSuccess1 = longSuccess1;
-            stats.longTotal1 = longTotal1;
-            stats.longSuccess2 = longSuccess2;
-            stats.longTotal2 = longTotal2;
-            stats.restSuccess1 = restSuccess1;
-            stats.restTotal1 = restTotal1;
-            stats.restSuccess2 = restSuccess2;
-            stats.restTotal2 = restTotal2;
-            stats.player1total = player1Score;
-            stats.player1break = player1Break;
-            stats.player2total = player2Score;
-            stats.player2break = player2Score;
-            stats.currentAmountRedPotted = currentAmountRedPotted;
+            stats.PotsSuccessPlayer1 = potsSuccessPlayer1;
+            stats.TotalTriesPlayer1 = totalTriesPlayer1;
+            stats.PotsSuccessPlayer2 = potsSuccessPlayer2;
+            stats.TotalTriesPlayer2 = totalTriesPlayer2;
+            stats.LongSuccess1 = longSuccess1;
+            stats.LongTotal1 = longTotal1;
+            stats.LongSuccess2 = longSuccess2;
+            stats.LongTotal2 = longTotal2;
+            stats.RestSuccess1 = restSuccess1;
+            stats.RestTotal1 = restTotal1;
+            stats.RestSuccess2 = restSuccess2;
+            stats.RestTotal2 = restTotal2;
+            stats.Player1total = player1Score;
+            stats.Player1break = player1Break;
+            stats.Player2total = player2Score;
+            stats.Player2break = player2Score;
+            stats.CurrentAmountRedPotted = currentAmountRedPotted;
+            stats.YellowPoint = yellowPoint;
+            stats.GreenPoint = greenPoint;
+            stats.BluePoint = bluePoint;
+            stats.BrownPoint = brownPoint;
+            stats.PinkPoint = pinkPoint;
+            stats.BlackPoint = blackPoint;
+            stats.GameNumber = gameNumber;
 
             _navigation.PushAsync(new StatisticPage(stats, _players));
         }
-        void AddLastPoints(Boolean player1Turn, int amount)
+        void AddLastPoints(int amount)
         {
             if(amount == 2)
             {
@@ -487,27 +502,34 @@ namespace SnookerStat.ViewModels
         public async Task StartNewGame()
         {
             GameScores gameScores = new GameScores();
-            await gameScores.SaveScore(player1Score, player2Score, player1Break, player2Break);
-            ClearContent();
+            if(gameNumber == 0)
+            {
+                gameNumber = 1;
+            } else
+            {
+                gameNumber++;
+            }
+            await gameScores.SaveScore(player1, player2, player1Score, player2Score, player1Break, player2Break, gameNumber);
+            ClearContent(0);
         }
-        void ClearContent()
+        void ClearContent(int clear)
         {
-            potsSuccessPlayer1 = 0;
-            totalTriesPlayer1 = 0;
-            potsSuccessPlayer2 = 0;
-            totalTriesPlayer2 = 0;
-            longSuccess1 = 0;
-            longTotal1 = 0;
-            longSuccess2 = 0;
-            longTotal2 = 0;
-            restSuccess1 = 0;
-            restTotal1 = 0;
-            restSuccess2 = 0;
-            restTotal2 = 0;
-            player1Score = 0;
-            player1Break = 0;
-            player2Score = 0;
-            player2Score = 0;
+            potsSuccessPlayer1 = clear;
+            totalTriesPlayer1 = clear;
+            potsSuccessPlayer2 = clear;
+            totalTriesPlayer2 = clear;
+            longSuccess1 = clear;
+            longTotal1 = clear;
+            longSuccess2 = clear;
+            longTotal2 = clear;
+            restSuccess1 = clear;
+            restTotal1 = clear;
+            restSuccess2 = clear;
+            restTotal2 = clear;
+            Player1Score = 0;
+            Player1Break = 0;
+            Player2Score = 0;
+            Player2Score = 0;
         }
     }
 }

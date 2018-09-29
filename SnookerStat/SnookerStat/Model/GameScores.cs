@@ -20,20 +20,23 @@ namespace SnookerStat.Model
         public int TopBreakPlayer1 { get; set; }
         public int TopBreakPlayer2 { get; set; }
         public string WinningPlayer { get; set; }
-        public string GameNumber { get; set; }
+        public int GameNumber { get; set; }
         public DateTime GameDate { get; set; }
 
         HttpClient client = new HttpClient();
 
-        public async Task SaveScore(int player1Score, int player2Score, int player1Break, int player2Break) {
+        public async Task SaveScore(string player1, string player2, int player1Score, int player2Score, int player1Break, int player2Break, int gameNumber) {
             try
             {
                 string url = "https://snookerapiproject.azurewebsites.net/api/gamescore/storeGameStats";
                 var addGame = new GameScores {
+                    Player1 = player1,
+                    Player2 = player2,
                     ScorePlayer1 = player1Score,
                     ScorePlayer2 = player2Score,
                     TopBreakPlayer1 = player1Break,
                     TopBreakPlayer2 = player2Break,
+                    GameNumber = gameNumber,
                     GameDate = DateTime.Now
                 };
                 var json = JsonConvert.SerializeObject(addGame);

@@ -65,25 +65,25 @@ namespace SnookerStat.ViewModels
         public string PotsPlayer1 {
             get {
                 calculateAverageFor = "potsPlayer1";
-                CalculateAverage(_gameStatistics.potsSuccessPlayer1, _gameStatistics.totalTriesPlayer1);
+                CalculateAverage(_gameStatistics.PotsSuccessPlayer1, _gameStatistics.TotalTriesPlayer1);
 
-                return $"{averagePotsPlayer1}% ({_gameStatistics.potsSuccessPlayer1}/{_gameStatistics.totalTriesPlayer1})";
+                return $"{averagePotsPlayer1}% ({_gameStatistics.PotsSuccessPlayer1}/{_gameStatistics.TotalTriesPlayer1})";
             }
         }
         public string LongPlayer1 {
             get {
                 calculateAverageFor = "longPlayer1";
-                CalculateAverage(_gameStatistics.longSuccess1, _gameStatistics.longTotal1);
+                CalculateAverage(_gameStatistics.LongSuccess1, _gameStatistics.LongTotal1);
 
-                return $"{averageLongPlayer1}% ({_gameStatistics.longSuccess1}/{_gameStatistics.longTotal1})";
+                return $"{averageLongPlayer1}% ({_gameStatistics.LongSuccess1}/{_gameStatistics.LongTotal1})";
             }
         }
         public string RestPlayer1 {
             get {
                 calculateAverageFor = "restPlayer1";
-                CalculateAverage(_gameStatistics.restSuccess1, _gameStatistics.restTotal1);
+                CalculateAverage(_gameStatistics.RestSuccess1, _gameStatistics.RestTotal1);
 
-                return $"{averageRestPlayer1}% ({_gameStatistics.restSuccess1}/{_gameStatistics.restTotal1})";
+                return $"{averageRestPlayer1}% ({_gameStatistics.RestSuccess1}/{_gameStatistics.RestTotal1})";
             }
         }
         public string PsntPlayer1 {
@@ -115,25 +115,25 @@ namespace SnookerStat.ViewModels
         public string PotsPlayer2 {
             get {
                 calculateAverageFor = "potsPlayer2";
-                CalculateAverage(_gameStatistics.potsSuccessPlayer2, _gameStatistics.totalTriesPlayer2);
+                CalculateAverage(_gameStatistics.PotsSuccessPlayer2, _gameStatistics.TotalTriesPlayer2);
 
-                return $"{averagePotsPlayer2}% ({_gameStatistics.potsSuccessPlayer2}/{_gameStatistics.totalTriesPlayer2})";
+                return $"{averagePotsPlayer2}% ({_gameStatistics.PotsSuccessPlayer2}/{_gameStatistics.TotalTriesPlayer2})";
             }
         }
         public string LongPlayer2 {
             get {
                 calculateAverageFor = "longPlayer2";
-                CalculateAverage(_gameStatistics.longSuccess2, _gameStatistics.longTotal2);
+                CalculateAverage(_gameStatistics.LongSuccess2, _gameStatistics.LongTotal2);
 
-                return $"{averagePotsPlayer2}% ({_gameStatistics.longSuccess2}/{_gameStatistics.longTotal2})";
+                return $"{averagePotsPlayer2}% ({_gameStatistics.LongSuccess2}/{_gameStatistics.LongTotal2})";
             }
         }
         public string RestPlayer2 {
             get {
                 calculateAverageFor = "restPlayer2";
-                CalculateAverage(_gameStatistics.restSuccess2, _gameStatistics.restTotal2);
+                CalculateAverage(_gameStatistics.RestSuccess2, _gameStatistics.RestTotal2);
 
-                return $"{averageRestPlayer1}% ({_gameStatistics.restSuccess2}/{_gameStatistics.restTotal2})";
+                return $"{averageRestPlayer1}% ({_gameStatistics.RestSuccess2}/{_gameStatistics.RestTotal2})";
             }
         }
         public void CalculateAverage(int success, int total)
@@ -211,23 +211,23 @@ namespace SnookerStat.ViewModels
             //this is basically hack as cache not used
             //TODO: some alternate method might be in place
             GameStatistics stats = new GameStatistics();
-            stats.potsSuccessPlayer1 = _gameStatistics.potsSuccessPlayer1;
-            stats.totalTriesPlayer1 = _gameStatistics.totalTriesPlayer1;
-            stats.potsSuccessPlayer2 = _gameStatistics.potsSuccessPlayer2;
-            stats.totalTriesPlayer2 = _gameStatistics.totalTriesPlayer2;
-            stats.longSuccess1 = _gameStatistics.longSuccess1;
-            stats.longTotal1 = _gameStatistics.longTotal1;
-            stats.longSuccess2 = _gameStatistics.longSuccess2;
-            stats.longTotal2 = _gameStatistics.longTotal2;
-            stats.restSuccess1 = _gameStatistics.restSuccess1;
-            stats.restTotal1 = _gameStatistics.restTotal1;
-            stats.restSuccess2 = _gameStatistics.restSuccess2;
-            stats.restTotal2 = _gameStatistics.restTotal2;
-            stats.player1total = _gameStatistics.player1total;
-            stats.player1break = _gameStatistics.player1break;
-            stats.player2total = _gameStatistics.player2total;
-            stats.player2break = _gameStatistics.player2break;
-            stats.currentAmountRedPotted = _gameStatistics.currentAmountRedPotted;
+            stats.PotsSuccessPlayer1 = _gameStatistics.PotsSuccessPlayer1;
+            stats.TotalTriesPlayer1 = _gameStatistics.TotalTriesPlayer1;
+            stats.PotsSuccessPlayer2 = _gameStatistics.PotsSuccessPlayer2;
+            stats.TotalTriesPlayer2 = _gameStatistics.TotalTriesPlayer2;
+            stats.LongSuccess1 = _gameStatistics.LongSuccess1;
+            stats.LongTotal1 = _gameStatistics.LongTotal1;
+            stats.LongSuccess2 = _gameStatistics.LongSuccess2;
+            stats.LongTotal2 = _gameStatistics.LongTotal2;
+            stats.RestSuccess1 = _gameStatistics.RestSuccess1;
+            stats.RestTotal1 = _gameStatistics.RestTotal1;
+            stats.RestSuccess2 = _gameStatistics.RestSuccess2;
+            stats.RestTotal2 = _gameStatistics.RestTotal2;
+            stats.Player1total = _gameStatistics.Player1total;
+            stats.Player1break = _gameStatistics.Player1break;
+            stats.Player2total = _gameStatistics.Player2total;
+            stats.Player2break = _gameStatistics.Player2break;
+            stats.CurrentAmountRedPotted = _gameStatistics.CurrentAmountRedPotted;
 
             var playGamePage = new PlayGamePage(stats, _player);
             NavigationPage.SetHasNavigationBar(playGamePage, false);

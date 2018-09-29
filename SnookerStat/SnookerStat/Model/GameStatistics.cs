@@ -10,22 +10,30 @@ namespace SnookerStat.Model
         {
         }
 
-        public int potsSuccessPlayer1 { get; set; }
-        public int totalTriesPlayer1 { get; set; }
-        public int potsSuccessPlayer2 { get; set; }
-        public int totalTriesPlayer2 { get; set; }
-        public int longSuccess1 { get; set; }
-        public int longTotal1 { get; set; }
-        public int longSuccess2 { get; set; }
-        public int longTotal2 { get; set; }
-        public int restSuccess1 { get; set; }
-        public int restTotal1 { get; set; }
-        public int restSuccess2 { get; set; }
-        public int restTotal2 { get; set; }
-        public int player1total { get; set; }
-        public int player2total { get; set; }
-        public int player1break { get; set; }
-        public int player2break { get; set; }
-        public int currentAmountRedPotted { get; set; }
+        public int PotsSuccessPlayer1 { get; set; }
+        public int PotalTriesPlayer1 { get; set; }
+        public int PotsSuccessPlayer2 { get; set; }
+        public int TotalTriesPlayer2 { get; set; }
+        public int TotalTriesPlayer1 { get; set; }
+        public int LongSuccess1 { get; set; }
+        public int LongTotal1 { get; set; }
+        public int LongSuccess2 { get; set; }
+        public int LongTotal2 { get; set; }
+        public int RestSuccess1 { get; set; }
+        public int RestTotal1 { get; set; }
+        public int RestSuccess2 { get; set; }
+        public int RestTotal2 { get; set; }
+        public int Player1total { get; set; }
+        public int Player2total { get; set; }
+        public int Player1break { get; set; }
+        public int Player2break { get; set; }
+        public int CurrentAmountRedPotted { get; set; }
+        public int YellowPoint { get; set; }
+        public int GreenPoint { get; set; }
+        public int BluePoint { get; set; }
+        public int BrownPoint { get; set; }
+        public int PinkPoint { get; set; }
+        public int BlackPoint { get; set; }
+        public int GameNumber { get; set; }
     }
 }
