@@ -5,10 +5,13 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Padding="0,80,0, 0">
             <Label Text="Nick Name" WidthRequest="150"></Label>
+            <Label Text="{Binding NickNameEmpty}" TextColor="Red" WidthRequest="150"></Label>
             <Entry Text="{Binding NickName}"  WidthRequest="150"></Entry>
             <Label Text="Password" WidthRequest="150"></Label>
+            <Label Text="{Binding PasswordEmpty}" TextColor="Red" WidthRequest="150"></Label>
             <Entry Text="{Binding Password}" x:Name="Password" IsPassword="True" WidthRequest="150"></Entry>
             <Label Text="{Binding NotCorrectPassword}" TextColor="Red" WidthRequest="150"></Label>
+            <Label Text="{Binding PlayerNotRegistered}" TextColor="Red" WidthRequest="150"></Label>
             <Button Text="Login" Command="{Binding Login}"  WidthRequest="100"></Button>
         </StackLayout>
     </ContentPage.Content>

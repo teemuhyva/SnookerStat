@@ -17,6 +17,7 @@ namespace SnookerStat.ViewModels
         private string nickName;
         private string email;
         private string password;
+        private string emptyField;
 
         INavigation _navigation;
 
@@ -39,6 +40,15 @@ namespace SnookerStat.ViewModels
             }
             set {
                 firstName = value;
+                OnPropertyChanged();
+            }
+        }
+        public string EmptyField {
+            get {
+                return emptyField;
+            }
+            set {
+                emptyField = value;
                 OnPropertyChanged();
             }
         }
@@ -87,17 +97,23 @@ namespace SnookerStat.ViewModels
             string salt = PasswordHash.CreateSalt(10);
             string hash = PasswordHash.GenerateSHA256Hash(Password, salt);
 
-            var registerPlayer = new RegisterPlayer
+            if(FirstName == null || LastName == null || NickName == null || Email == null || Password == null)
             {
-                FirstName = firstName,
-                LastName = lastName,
-                NickName = nickName,
-                Email = email,
-                Password = hash
-            };
+                EmptyField = "All Fields must be added";
+            } else
+            {
+                var registerPlayer = new RegisterPlayer
+                {
+                    FirstName = firstName,
+                    LastName = lastName,
+                    NickName = nickName,
+                    Email = email,
+                    Password = hash
+                };
 
-            await register.RegisterNewPlayer(registerPlayer);
-            _navigation.PushAsync(new ChooseLoginMethod());
+                await register.RegisterNewPlayer(registerPlayer);
+                _navigation.PushAsync(new ChooseLoginMethod());
+            }
         }
     }
 }

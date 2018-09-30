@@ -5,15 +5,16 @@
     <ContentPage.Content>
         <StackLayout HorizontalOptions="Center" Padding="0,80,0, 0">
             <Label Text="Firstname" WidthRequest="150"></Label>
-            <Entry Text="{Binding FirstName}"  WidthRequest="150"></Entry>
+            <Entry Text="{Binding FirstName}"  WidthRequest="150"></Entry>            
             <Label Text="Lastname" WidthRequest="150"></Label>
             <Entry Text="{Binding LastName}"  WidthRequest="150"></Entry>
             <Label Text="Nickname" WidthRequest="150"></Label>
             <Entry Text="{Binding NickName}"  WidthRequest="150"></Entry>
             <Label Text="Email" WidthRequest="150"></Label>
             <Entry Text="{Binding Email}"  WidthRequest="150"></Entry>
-            <Label Text="Password" WidthRequest="150"></Label>
+            <Label Text="Password" WidthRequest="150"></Label>            
             <Entry Text="{Binding Password}" x:Name="Password" IsPassword="True" WidthRequest="150"></Entry>
+            <Label Text="{Binding EmptyField}" TextColor="Red" WidthRequest="150"></Label>
             <Button Text="Register" Command="{Binding Register}"  WidthRequest="100"></Button>
         </StackLayout>
     </ContentPage.Content>

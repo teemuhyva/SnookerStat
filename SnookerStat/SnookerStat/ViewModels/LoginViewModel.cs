@@ -13,8 +13,11 @@ namespace SnookerStat.ViewModels
     public class LoginViewModel : INotifyPropertyChanged
     {
         private string nickName;
+        private string nickNameEmpty;
         private string password;
+        private string passwordEmpty;
         private string notCorrectPassword;
+        private string playerNotRegistered;
 
         INavigation _navigation;
 
@@ -39,12 +42,30 @@ namespace SnookerStat.ViewModels
                 OnPropertyChanged();
             }
         }
+        public string NickNameEmpty {
+            get {
+                return nickNameEmpty;
+            }
+            set {
+                nickNameEmpty = value;
+                OnPropertyChanged();
+            }
+        }
         public string Password {
             get {
                 return password;
             }
             set {
                 password = value;
+                OnPropertyChanged();
+            }
+        }
+        public string PasswordEmpty {
+            get {
+                return passwordEmpty;
+            }
+            set {
+                passwordEmpty = value;
                 OnPropertyChanged();
             }
         }
@@ -59,31 +80,57 @@ namespace SnookerStat.ViewModels
             }
         }
 
+        public string PlayerNotRegistered {
+            get {
+                return playerNotRegistered;
+            }
+            set {
+                playerNotRegistered = value;
+                OnPropertyChanged();
+            }
+        }
+
         public ICommand Login { get; set; }
 
         public async Task LoginExistingUser()
         {
-            LoginPlayer login = new LoginPlayer();
-            string salt = PasswordHash.CreateSalt(10);
-            string hash = PasswordHash.GenerateSHA256Hash(Password, salt);
 
-            var loginPlayer = new LoginPlayer
+            if(NickName == null)
             {
-                NickName = NickName,
-                GivenPasswordHash = hash,
-                GivenPassword = Password,
-                GivenPasswordSalt = salt
-            };
+                NickNameEmpty = "NickName required";
+            } else if(Password == null)
+            {
+                PasswordEmpty = "Password required";
+            } else
+            {
+                LoginPlayer login = new LoginPlayer();
+                string salt = PasswordHash.CreateSalt(10);
+                string hash = PasswordHash.GenerateSHA256Hash(Password, salt);
 
-            await login.LoginAsExistingPlayer(loginPlayer);
-            if (login.CorrectPassword.Equals("Password was correct"))
-            {
-                _navigation.PushAsync(new MainPage());
-            }
-            else
-            {
-                NotCorrectPassword = "Incorrect Password";
-            }
+                var loginPlayer = new LoginPlayer
+                {
+                    NickName = NickName,
+                    GivenPasswordHash = hash,
+                    GivenPassword = Password,
+                    GivenPasswordSalt = salt
+                };
+
+                await login.LoginAsExistingPlayer(loginPlayer);
+                if(login.NickName == null)
+                {
+                    PlayerNotRegistered = "Player not registered";
+                } else
+                {
+                    if (login.CorrectPassword.Equals("Password was correct"))
+                    {
+                        _navigation.PushAsync(new MainPage());
+                    }
+                    else
+                    {
+                        NotCorrectPassword = "Incorrect Password";
+                    }
+                }               
+            }            
         }
     }
 }

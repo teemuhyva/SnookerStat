@@ -34,16 +34,24 @@ namespace SnookerStat.Model
                 {
                     var response = await request.Content.ReadAsStringAsync();
                     var playerObject = JsonConvert.DeserializeObject<LoginPlayer>(response);
-                    bool isCorrectPassword = PasswordHash.VerifyPassword(player.GivenPassword, player.GivenPasswordSalt, player.GivenPasswordHash);
 
-                    if (!isCorrectPassword)
+                    if(playerObject.NickName == null)
                     {
-                        CorrectPassword = "Password was not correct";
-                    }
-                    else
+                        NickName = null;
+                    } else
                     {
-                        CorrectPassword = "Password was correct";
+                        bool isCorrectPassword = PasswordHash.VerifyPassword(player.GivenPassword, player.GivenPasswordSalt, player.GivenPasswordHash);
+
+                        if (!isCorrectPassword)
+                        {
+                            CorrectPassword = "Password was not correct";
+                        }
+                        else
+                        {
+                            CorrectPassword = "Password was correct";
+                        }
                     }
+                    
                 }
             }
             catch (Exception e)
