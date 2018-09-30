@@ -50,7 +50,7 @@ namespace SnookerStat
 
         async Task FindPlayerWithNick(object sender, EventArgs e)
         {
-            PlayerPickViewModel findPlayer = new PlayerPickViewModel(loginPlayer);
+            PlayerPickViewModel findPlayer = new PlayerPickViewModel();
             string playerNick = EnteredNick.Text;
             if(playerNick != null)
             {
