@@ -11,7 +11,7 @@ namespace SnookerStat
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new ChooseLoginMethod());
         }
 
         protected override void OnStart()

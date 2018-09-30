@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SnookerStat.RegisterPage">
+    <ContentPage.Content>
+        <StackLayout HorizontalOptions="Center" Padding="0,80,0, 0">
+            <Label Text="Firstname" WidthRequest="150"></Label>
+            <Entry Text="{Binding FirstName}"  WidthRequest="150"></Entry>
+            <Label Text="Lastname" WidthRequest="150"></Label>
+            <Entry Text="{Binding LastName}"  WidthRequest="150"></Entry>
+            <Label Text="Nickname" WidthRequest="150"></Label>
+            <Entry Text="{Binding NickName}"  WidthRequest="150"></Entry>
+            <Label Text="Email" WidthRequest="150"></Label>
+            <Entry Text="{Binding Email}"  WidthRequest="150"></Entry>
+            <Label Text="Password" WidthRequest="150"></Label>
+            <Entry Text="{Binding Password}" x:Name="Password" IsPassword="True" WidthRequest="150"></Entry>
+            <Button Text="Register" Command="{Binding Register}"  WidthRequest="100"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
