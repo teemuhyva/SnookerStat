@@ -34,7 +34,7 @@ namespace SnookerStat.Model
                 {
                     var response = await request.Content.ReadAsStringAsync();
                     var playerObject = JsonConvert.DeserializeObject<LoginPlayer>(response);
-                    bool isCorrectPassword = PasswordHash.VerifyPassword(Password, player.GivenPasswordSalt, player.GivenPasswordHash);
+                    bool isCorrectPassword = PasswordHash.VerifyPassword(player.GivenPassword, player.GivenPasswordSalt, player.GivenPasswordHash);
 
                     if (!isCorrectPassword)
                     {
