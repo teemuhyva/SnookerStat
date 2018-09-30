@@ -22,6 +22,11 @@ namespace SnookerStat.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
+        public PlayerPickViewModel(LoginPlayer loginPlayer)
+        {
+            player1 = loginPlayer.NickName;
+        }
+
         public string Players {
             get {
                 return findPlayerWithNick;

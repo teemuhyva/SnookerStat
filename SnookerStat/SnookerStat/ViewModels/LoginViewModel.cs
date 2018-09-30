@@ -123,7 +123,7 @@ namespace SnookerStat.ViewModels
                 {
                     if (login.CorrectPassword.Equals("Password was correct"))
                     {
-                        _navigation.PushAsync(new MainPage());
+                        _navigation.PushAsync(new MainPage(login));
                     }
                     else
                     {

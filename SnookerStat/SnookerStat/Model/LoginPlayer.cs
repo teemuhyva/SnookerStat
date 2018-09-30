@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SnookerStat.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -37,9 +38,8 @@ namespace SnookerStat.Model
 
                     if(playerObject.NickName == null)
                     {
-                        NickName = null;
-                    } else
-                    {
+                        player.NickName = null;
+                    } else {                        
                         bool isCorrectPassword = PasswordHash.VerifyPassword(player.GivenPassword, player.GivenPasswordSalt, player.GivenPasswordHash);
 
                         if (!isCorrectPassword)
@@ -49,9 +49,9 @@ namespace SnookerStat.Model
                         else
                         {
                             CorrectPassword = "Password was correct";
+                            NickName = playerObject.NickName;
                         }
-                    }
-                    
+                    }                    
                 }
             }
             catch (Exception e)

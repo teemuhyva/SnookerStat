@@ -16,6 +16,7 @@ namespace SnookerStat
 	{
         GameStatistics gameStatistics = new GameStatistics();
         Players player = new Players();
+        LoginPlayer loginPlayer = new LoginPlayer();
         public PlaySetGame3 (Players players)
 		{
 			InitializeComponent ();
@@ -32,7 +33,7 @@ namespace SnookerStat
 
         async void BackToSetGame2(object sender, EventArgs e)
         {
-            var playSetGame2 = new PlaySetGame2();
+            var playSetGame2 = new PlaySetGame2(loginPlayer);
             NavigationPage.SetHasNavigationBar(playSetGame2, false);
             await Navigation.PushAsync(playSetGame2);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SnookerStat.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,14 +10,16 @@ namespace SnookerStat
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        LoginPlayer loginPlayer = new LoginPlayer();
+        public MainPage(LoginPlayer loginUser)
         {
             InitializeComponent();
+            loginPlayer.NickName = loginUser.NickName;
         }
 
         async void Play(object sender, EventArgs e)
         {
-            var playSetGame = new PlaySetGame();
+            var playSetGame = new PlaySetGame(loginPlayer);
             NavigationPage.SetHasNavigationBar(playSetGame, false);
             await Navigation.PushAsync(playSetGame);
         }

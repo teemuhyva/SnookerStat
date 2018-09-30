@@ -17,11 +17,7 @@
             </StackLayout>
             <StackLayout Padding="5" Orientation="Horizontal">
                 <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="Start" >
-                    <Label x:Name="player1" Text="{Binding Player1}" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
-                        <Label.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="EmptyPlayerOne" />
-                        </Label.GestureRecognizers>
-                    </Label>
+                    <Label x:Name="player1" Text="{Binding Player1}" HorizontalOptions="StartAndExpand" VerticalOptions="Center" />
                 </StackLayout>
                 <StackLayout Spacing="0"  Orientation="Horizontal" HorizontalOptions="EndAndExpand" >
                     <Label x:Name="player2" Text="{Binding Player2}" HorizontalOptions="StartAndExpand" VerticalOptions="Center">
