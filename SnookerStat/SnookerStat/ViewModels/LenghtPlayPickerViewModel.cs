@@ -10,12 +10,14 @@ namespace SnookerStat.ViewModels
     public class LenghtPlayPickerViewModel
     {
         Players _players;
+        LoginPlayer _loginPlayer;
 
-        public LenghtPlayPickerViewModel(Players players)
+        public LenghtPlayPickerViewModel(Players players, LoginPlayer loginPlayer)
         {
             HandyCap = AddHandyCapSelection();
             BestOff = AddHBestOffSelection();
             _players = players;
+            _loginPlayer = loginPlayer;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -28,7 +30,7 @@ namespace SnookerStat.ViewModels
         public List<GameSettings> BestOff { get; set; }
         public string Player1 {
             get {
-                return _players.Player1;
+                return _loginPlayer.NickName;
             }
         }
 

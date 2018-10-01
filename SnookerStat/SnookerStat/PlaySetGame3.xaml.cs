@@ -16,12 +16,14 @@ namespace SnookerStat
 	{
         GameStatistics gameStatistics = new GameStatistics();
         Players player = new Players();
-        LoginPlayer loginPlayer = new LoginPlayer();
-        public PlaySetGame3 (Players players)
+        LoginPlayer _loginPlayer;
+        public PlaySetGame3 (Players players, LoginPlayer loginPlayer)
 		{
 			InitializeComponent ();
+            _loginPlayer = loginPlayer;
             player = players;
-            BindingContext = new LenghtPlayPickerViewModel(players);
+            player.Player1 = _loginPlayer.NickName;
+            BindingContext = new LenghtPlayPickerViewModel(players, loginPlayer);
         }
         async void PlayGame(object sender, EventArgs e)
         {
@@ -33,7 +35,7 @@ namespace SnookerStat
 
         async void BackToSetGame2(object sender, EventArgs e)
         {
-            var playSetGame2 = new PlaySetGame2(loginPlayer);
+            var playSetGame2 = new PlaySetGame2(_loginPlayer);
             NavigationPage.SetHasNavigationBar(playSetGame2, false);
             await Navigation.PushAsync(playSetGame2);
         }

@@ -16,19 +16,19 @@ namespace SnookerStat
 	public partial class PlaySetGame2 : ContentPage
 	{
         Players players = new Players();
-        LoginPlayer loginPlayer;
+        LoginPlayer _loginPlayer;
         public PlaySetGame2 (LoginPlayer loginPlayer)
 		{
 			InitializeComponent ();
-
-            BindingContext = new PlayerPickViewModel(loginPlayer);
+            _loginPlayer = loginPlayer;
+            BindingContext = new PlayerPickViewModel(_loginPlayer);
 
             LoadPlayerList();
         }
 
         async void SetHandiCapPage(object sender, EventArgs e)
         {
-            var playSetGame3 = new PlaySetGame3(players);
+            var playSetGame3 = new PlaySetGame3(players, _loginPlayer);
             NavigationPage.SetHasNavigationBar(playSetGame3, false);
             await Navigation.PushAsync(playSetGame3);
         }
